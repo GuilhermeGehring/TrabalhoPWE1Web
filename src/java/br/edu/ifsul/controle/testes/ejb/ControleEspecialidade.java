@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifsul.controle;
+package br.edu.ifsul.controle.testes.ejb;
 
-import br.edu.ifsul.dao.InstituicaoDAO;
-import br.edu.ifsul.modelo.Instituicao;
+import br.edu.ifsul.dao.EspecialidadeDAO;
+import br.edu.ifsul.modelo.Especialidade;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -17,24 +17,24 @@ import javax.inject.Named;
  *
  * @author 20171pf.cc0178
  */
-@Named(value = "controleInstituicao")
+@Named(value = "controleEspecialidade1")
 @SessionScoped
-public class ControleInstituicao implements Serializable {
+public class ControleEspecialidade implements Serializable {
     
     @EJB
-    private InstituicaoDAO dao;
+    private EspecialidadeDAO dao;
 
-    private Instituicao objeto;
+    private Especialidade objeto;
 
-    public ControleInstituicao() {
+    public ControleEspecialidade() {
     }
 
     public String listar(){
-        return "/privado/instituicao/crud?faces-redirect=true";
+        return "/privado/especialidade/crud?faces-redirect=true";
     }
 
     public void novo(){
-        objeto = new Instituicao();
+        objeto = new Especialidade();
     }
 
     public void alterar(Object id){
@@ -71,11 +71,11 @@ public class ControleInstituicao implements Serializable {
         }
     }
 
-    public InstituicaoDAO getDao() {
+    public EspecialidadeDAO getDao() {
         return dao;
     }
 
-    public Instituicao getObjeto() {
+    public Especialidade getObjeto() {
         return objeto;
     }
 }

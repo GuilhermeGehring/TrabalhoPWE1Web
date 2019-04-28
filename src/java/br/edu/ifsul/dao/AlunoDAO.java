@@ -5,7 +5,7 @@
  */
 package br.edu.ifsul.dao;
 
-import br.edu.ifsul.modelo.Instituicao;
+import br.edu.ifsul.modelo.Aluno;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
@@ -14,10 +14,10 @@ import javax.ejb.Stateful;
  * @author 20171pf.cc0178
  */
 @Stateful
-public class InstituicaoDAO extends DAOGenerico<Instituicao> implements Serializable{
+public class AlunoDAO extends DAOGenerico<Aluno> implements Serializable{
 
-    public InstituicaoDAO() {
-        super(Instituicao.class);
+    public AlunoDAO() {
+        super(Aluno.class);
     }
     
 }

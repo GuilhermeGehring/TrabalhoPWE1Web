@@ -19,9 +19,18 @@
                 <p:submenu label="Cadastros">
                     <p:column>
                         <p:submenu label="Básicos">
+                            <p:menuitem action="#{controleEspecialidade.listar()}"
+                                        value="Manutenção de Especialidades"
+                                        ajax="false"/>
                             <p:menuitem action="#{controleInstituicao.listar()}"
                                         value="Manutenção de Instituições"
-                                        ajax="false"/>                                  
+                                        ajax="false"/>                            
+                            <p:menuitem action="#{controleAluno.listar()}"
+                                        value="Manutenção de Alunos"
+                                        ajax="false"/>
+                            <p:menuitem action="#{controleProfessor.listar()}"
+                                        value="Manutenção de Professores"
+                                        ajax="false"/>
                         </p:submenu>                     
                     </p:column>
                 </p:submenu>   

@@ -5,8 +5,8 @@
  */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.dao.InstituicaoDAO;
-import br.edu.ifsul.modelo.Instituicao;
+import br.edu.ifsul.dao.AlunoDAO;
+import br.edu.ifsul.modelo.Aluno;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -17,24 +17,24 @@ import javax.inject.Named;
  *
  * @author 20171pf.cc0178
  */
-@Named(value = "controleInstituicao")
+@Named(value = "controleAluno")
 @SessionScoped
-public class ControleInstituicao implements Serializable {
+public class ControleAluno implements Serializable {
     
     @EJB
-    private InstituicaoDAO dao;
+    private AlunoDAO dao;
 
-    private Instituicao objeto;
+    private Aluno objeto;
 
-    public ControleInstituicao() {
+    public ControleAluno() {
     }
 
     public String listar(){
-        return "/privado/instituicao/crud?faces-redirect=true";
+        return "/privado/aluno/crud?faces-redirect=true";
     }
 
     public void novo(){
-        objeto = new Instituicao();
+        objeto = new Aluno();
     }
 
     public void alterar(Object id){
@@ -71,11 +71,11 @@ public class ControleInstituicao implements Serializable {
         }
     }
 
-    public InstituicaoDAO getDao() {
+    public AlunoDAO getDao() {
         return dao;
     }
 
-    public Instituicao getObjeto() {
+    public Aluno getObjeto() {
         return objeto;
     }
 }
