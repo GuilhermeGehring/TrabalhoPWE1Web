@@ -10,7 +10,7 @@ import br.edu.ifsul.modelo.Instituicao;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -18,7 +18,7 @@ import javax.inject.Named;
  * @author 20171pf.cc0178
  */
 @Named(value = "controleInstituicao")
-@SessionScoped
+@ViewScoped
 public class ControleInstituicao implements Serializable {
     
     @EJB

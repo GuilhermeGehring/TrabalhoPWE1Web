@@ -30,7 +30,10 @@
                     </p:column>
                     <p:column headerText="Nome">
                         <p:outputLabel value="#{obj.nome}"/>
-                    </p:column>                    
+                    </p:column>
+                    <p:column headerText="Email">
+                        <p:outputLabel value="#{obj.email}"/>
+                    </p:column>
                     <p:column headerText="Ações">
                         <div align="center">
                             <p:commandButton actionListener="#{controleAluno.alterar(obj.id)}"
@@ -71,9 +74,11 @@
                             <p:calendar value="#{controleAluno.objeto.nascimento}"
                                          id="txtNascimento"
                                          locale="pt_BR"
-                                         pattern="yyyy-mm-dd"
+                                         pattern="dd/MM/yyyy"
                                          navigator="true"
-                                         placeholder="Obrigatório"/>                                
+                                         placeholder="Obrigatório"
+                                         converter="converterCalendar">                                
+                            </p:calendar>
                         </p:panelGrid>
                     </div>
 

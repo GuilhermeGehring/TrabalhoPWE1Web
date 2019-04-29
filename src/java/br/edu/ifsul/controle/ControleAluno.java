@@ -10,7 +10,7 @@ import br.edu.ifsul.modelo.Aluno;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -18,7 +18,7 @@ import javax.inject.Named;
  * @author 20171pf.cc0178
  */
 @Named(value = "controleAluno")
-@SessionScoped
+@ViewScoped
 public class ControleAluno implements Serializable {
     
     @EJB
@@ -59,15 +59,15 @@ public class ControleAluno implements Serializable {
 
     public void salvar(){
         try {
-                if (objeto.getId() == null){
-                        dao.persist(objeto);
-                } else {
-                        dao.merge(objeto);
-                }
-                Util.mensagemInformacao("Objeto persistido com sucesso!");            
+            if (objeto.getId() == null){
+                    dao.persist(objeto);
+            } else {
+                    dao.merge(objeto);
+            }
+            Util.mensagemInformacao("Objeto persistido com sucesso!");            
         } catch(Exception e){
-                Util.mensagemErro("Erro ao persistir objeto: " + 
-                                Util.getMensagemErro(e));
+            Util.mensagemErro("Erro ao persistir objeto: " + 
+                            Util.getMensagemErro(e));
         }
     }
 
