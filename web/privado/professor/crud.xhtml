@@ -30,7 +30,10 @@
                     </p:column>
                     <p:column headerText="Nome">
                         <p:outputLabel value="#{obj.nome}"/>
-                    </p:column>                    
+                    </p:column>
+                    <p:column headerText="Titulação">
+                        <p:outputLabel value="#{obj.titulacao}"/>
+                    </p:column>
                     <p:column headerText="Ações">
                         <div align="center">
                             <p:commandButton actionListener="#{controleProfessor.alterar(obj.id)}"
