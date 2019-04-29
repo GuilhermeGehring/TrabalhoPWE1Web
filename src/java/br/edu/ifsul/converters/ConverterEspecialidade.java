@@ -25,7 +25,7 @@ public class ConverterEspecialidade implements Serializable, Converter {
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        if (string == null || string.equals("Selecione um registro")){
+        if (string == null || string.equals("Selecione uma Especialidade")){
             return null;
         }
         return em.find(Especialidade.class, Integer.parseInt(string));
