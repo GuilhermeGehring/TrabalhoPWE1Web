@@ -5,17 +5,18 @@
  */
 package br.edu.ifsul.dao;
 
+import br.edu.ifsul.modelo.Aluno;
 import br.edu.ifsul.modelo.Professor;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
 /**
  *
- * @author 20171pf.cc0178
+ * @author guilherme
  */
 @Stateful
 public class ProfessorDAO extends DAOGenerico<Professor> implements Serializable{
-
+    
     public ProfessorDAO() {
         super(Professor.class);
     }

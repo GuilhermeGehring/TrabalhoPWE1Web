@@ -27,34 +27,33 @@ public class DAOGenerico<TipoGenerics> implements Serializable {
        this.classePersistente = clazz;
     }
 
-    public List<TipoGenerics> getListaObjetos() {
-       
+    public List<TipoGenerics> getListaObjetos() {        
         String jpql = "from " + classePersistente.getSimpleName();
         return em.createQuery(jpql).getResultList();
     }
 
 
     public List<TipoGenerics> getListaTodos() {
-            String jpql = "from " + classePersistente.getSimpleName();
-            
-            return em.createQuery(jpql).getResultList();
+        
+        String jpql = "from " + classePersistente.getSimpleName();
+        return em.createQuery(jpql).getResultList();
     }
 
     public void persist(TipoGenerics obj) throws Exception {
-            em.persist(obj);
+        em.persist(obj);
     }
 
     public void merge(TipoGenerics obj) throws Exception {
-            em.merge(obj);
+        em.merge(obj);
     }
 
-    public TipoGenerics getObjectById(Object id) throws Exception {
-            return (TipoGenerics) em.find(classePersistente, id);
+    public TipoGenerics getObjectById(Object id) throws Exception {        
+        return (TipoGenerics) em.find(classePersistente, id);
     }
 
     public void remover(TipoGenerics obj) throws Exception {
-            obj = em.merge(obj);
-            em.remove(obj);
+        obj = em.merge(obj);
+        em.remove(obj);
     }
 
 }

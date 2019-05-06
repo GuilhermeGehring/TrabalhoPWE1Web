@@ -67,7 +67,10 @@
                                          size="75" maxlength="100" id="txtNome"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Ano de fundação" for="txtAnoFundacao"/>
-                            <p:inputText type="number" value="#{controleInstituicao.objeto.anoFundacao}" maxlength="4" size="4"
+                            <p:inputMask mask="9999"                                        
+                                        value="#{controleInstituicao.objeto.anoFundacao}"
+                                        maxlength="4"
+                                        size="4"
                                         id="txtAnoFundacao"/>                             
                         </p:panelGrid>
                     </div>

@@ -39,7 +39,7 @@ public class ControleAluno implements Serializable {
 
     public void alterar(Object id){
         try {
-            objeto = dao.getObjectById(id);            
+            objeto = dao.getObjectById(id);
         } catch (Exception e){
             Util.mensagemErro("Erro ao recuperar objeto: " +                     
                     Util.getMensagemErro(e));

@@ -15,7 +15,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author 20171pf.cc0178
+ * @author guilherme
  */
 @Named(value = "controleProfessor")
 @ViewScoped
