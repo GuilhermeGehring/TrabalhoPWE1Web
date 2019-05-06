@@ -62,30 +62,38 @@
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controleProfessor.objeto.nome}"
                                          size="75" maxlength="100" id="txtNome"
+                                         required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="E-mail" for="txtEmail"/>
                             <p:inputText value="#{controleProfessor.objeto.email}"
                                          size="75" maxlength="100" id="txtEmail"
+                                         required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Data de Nascimento" for="txtNascimento"/>
                             <p:calendar value="#{controleProfessor.objeto.nascimento}"
                                          id="txtNascimento"
                                          locale="pt_BR"
                                          pattern="dd/MM/yyyy"
+                                         mask="true"
                                          navigator="true"
                                          placeholder="Obrigatório"
+                                         required="true"
                                          converter="converterCalendar">
                             </p:calendar>
                             <p:outputLabel value="Titulação" for="txtTitulacao"/>
                             <p:inputText value="#{controleProfessor.objeto.titulacao}"
-                                         size="75" maxlength="100" id="txtTitulacao"
+                                         size="75" maxlength="100" 
+                                         id="txtTitulacao"
+                                         required="true"
                                          placeholder="Obrigatório"/>   
                             <p:outputLabel value="Topicos de Interesse" for="txtTopicosInteresse"/>
                             <p:inputTextarea rows="6" cols="33" value="#{controleProfessor.objeto.topicosInteresse}"
                                          id="txtTopicosInteresse"
+                                         required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Especialidade: " />
-                            <p:selectOneMenu value="#{controleProfessor.objeto.especialidade}" converter="#{converterEspecialidade}">
+                            <p:selectOneMenu value="#{controleProfessor.objeto.especialidade}"                                              
+                                             converter="#{converterEspecialidade}">
                                 <f:selectItem  itemLabel="Selecione uma Especialidade"/>
                                 <f:selectItems 
                                     value="#{controleEspecialidade.dao.listaObjetos}"

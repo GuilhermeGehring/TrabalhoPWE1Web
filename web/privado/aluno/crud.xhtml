@@ -64,11 +64,15 @@
                                          readonly="true"/>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controleAluno.objeto.nome}"
-                                         size="75" maxlength="100" id="txtNome"
+                                         size="75" maxlength="100"
+                                         id="txtNome"
+                                         required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="E-mail" for="txtEmail"/>
                             <p:inputText value="#{controleAluno.objeto.email}"
-                                         size="75" maxlength="100" id="txtEmail"
+                                         size="75" maxlength="100" 
+                                         id="txtEmail"
+                                         required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Data de Nascimento" for="txtNascimento"/>
                             <p:calendar value="#{controleAluno.objeto.nascimento}"
@@ -77,6 +81,7 @@
                                          pattern="dd/MM/yyyy"
                                          mask="true"                                         
                                          navigator="true"
+                                         required="true"
                                          placeholder="Obrigatório"
                                          converter="converterCalendar">                                
                             </p:calendar>

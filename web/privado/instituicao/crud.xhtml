@@ -65,13 +65,15 @@
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controleInstituicao.objeto.nome}"
                                          size="75" maxlength="100" id="txtNome"
+                                         required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Ano de fundação" for="txtAnoFundacao"/>
                             <p:inputMask mask="9999"                                        
                                         value="#{controleInstituicao.objeto.anoFundacao}"
+                                        required="true"
                                         maxlength="4"
                                         size="4"
-                                        id="txtAnoFundacao"/>                             
+                                        id="txtAnoFundacao"/>                       
                         </p:panelGrid>
                     </div>
 
