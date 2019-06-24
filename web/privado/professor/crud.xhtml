@@ -23,10 +23,10 @@
                              id="listagem">
                     <f:facet name="footer">
                         <p:outputLabel value=""/>
-                    </f:facet>   
+                    </f:facet>
 
-                    <p:column headerText="ID">
-                        <p:outputLabel value="#{obj.id}"/>
+                    <p:column headerText="Nome do Usuário">
+                        <p:outputLabel value="#{obj.nomeUsuario}"/>
                     </p:column>
                     <p:column headerText="Nome">
                         <p:outputLabel value="#{obj.nome}"/>
@@ -36,13 +36,13 @@
                     </p:column>
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton actionListener="#{controleProfessor.alterar(obj.id)}"
+                            <p:commandButton actionListener="#{controleProfessor.alterar(obj.nomeUsuario)}"
                                              icon="ui-icon-pencil"
                                              title="Editar"
                                              update="formEdicao"
                                              process="@this"
                                              oncomplete="PF('dlg').show();"/>
-                            <p:commandButton actionListener="#{controleProfessor.excluir(obj.id)}"
+                            <p:commandButton actionListener="#{controleProfessor.excluir(obj.nomeUsuario)}"
                                              icon="ui-icon-trash"
                                              update="@form"
                                              process="@this"
@@ -59,9 +59,22 @@
                     <p:growl id="growl"/>
                     <div align="center">
                         <p:panelGrid columns="2">
+                            <p:outputLabel value="Nome de Usuário" for="txtNomeUsuario"/>
+                            <p:inputText value="#{controleProfessor.objeto.nomeUsuario}"
+                                         size="75" maxlength="100"
+                                         id="txtNomeUsuario"
+                                         required="true"
+                                         readonly="#{controleProfessor.isEdit}"
+                                         placeholder="Obrigatório"/>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controleProfessor.objeto.nome}"
                                          size="75" maxlength="100" id="txtNome"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Senha" for="txtSenha"/>
+                            <p:inputText value="#{controleProfessor.objeto.senha}"
+                                         size="75" maxlength="100"
+                                         id="txtSenha"
                                          required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="E-mail" for="txtEmail"/>
@@ -70,36 +83,30 @@
                                          required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Data de Nascimento" for="txtNascimento"/>
-                            <p:calendar value="#{controleProfessor.objeto.nascimento}"
-                                         id="txtNascimento"
-                                         locale="pt_BR"
-                                         pattern="dd/MM/yyyy"
-                                         mask="true"
-                                         navigator="true"
-                                         placeholder="Obrigatório"
-                                         required="true"
-                                         converter="converterCalendar">
+                            <p:calendar id="txtNascimento" value="#{controleProfessor.objeto.nascimento}"
+                                        mask="true" pattern="dd/MM/yyyy" navigator="true" size="10">
+                                <f:converter binding="#{converterCalendar}" />
                             </p:calendar>
                             <p:outputLabel value="Titulação" for="txtTitulacao"/>
                             <p:inputText value="#{controleProfessor.objeto.titulacao}"
-                                         size="75" maxlength="100" 
+                                         size="75" maxlength="100"
                                          id="txtTitulacao"
                                          required="true"
-                                         placeholder="Obrigatório"/>   
+                                         placeholder="Obrigatório"/>
                             <p:outputLabel value="Topicos de Interesse" for="txtTopicosInteresse"/>
                             <p:inputTextarea rows="6" cols="33" value="#{controleProfessor.objeto.topicosInteresse}"
-                                         id="txtTopicosInteresse"
-                                         required="true"
-                                         placeholder="Obrigatório"/>
+                                             id="txtTopicosInteresse"
+                                             required="true"
+                                             placeholder="Obrigatório"/>
                             <p:outputLabel value="Especialidade: " />
-                            <p:selectOneMenu value="#{controleProfessor.objeto.especialidade}"                                              
+                            <p:selectOneMenu value="#{controleProfessor.objeto.especialidade}"
                                              converter="#{converterEspecialidade}">
                                 <f:selectItem  itemLabel="Selecione uma Especialidade"/>
-                                <f:selectItems 
+                                <f:selectItems
                                     value="#{controleEspecialidade.dao.listaObjetos}"
-                                    var="esp" 
+                                    var="esp"
                                     itemLabel="#{esp.nome}"
-                                />
+                                    />
                             </p:selectOneMenu>
                         </p:panelGrid>
                     </div>
@@ -114,7 +121,7 @@
                         </div>
                     </p:panel>
                 </h:form>
-            </p:dialog>            
+            </p:dialog>
         </ui:define>
     </ui:composition>
 </html>

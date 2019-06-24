@@ -23,10 +23,10 @@
                              id="listagem">
                     <f:facet name="footer">
                         <p:outputLabel value=""/>
-                    </f:facet>   
+                    </f:facet>
 
-                    <p:column headerText="ID">
-                        <p:outputLabel value="#{obj.id}"/>
+                    <p:column headerText="Nome do Usuário">
+                        <p:outputLabel value="#{obj.nomeUsuario}"/>
                     </p:column>
                     <p:column headerText="Nome">
                         <p:outputLabel value="#{obj.nome}"/>
@@ -36,13 +36,13 @@
                     </p:column>
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton actionListener="#{controleAluno.alterar(obj.id)}"
+                            <p:commandButton actionListener="#{controleAluno.alterar(obj.nomeUsuario)}"
                                              icon="ui-icon-pencil"
                                              title="Editar"
                                              update="formEdicao"
                                              process="@this"
                                              oncomplete="PF('dlg').show();"/>
-                            <p:commandButton actionListener="#{controleAluno.excluir(obj.id)}"
+                            <p:commandButton actionListener="#{controleAluno.excluir(obj.nomeUsuario)}"
                                              icon="ui-icon-trash"
                                              update="@form"
                                              process="@this"
@@ -59,31 +59,35 @@
                     <p:growl id="growl"/>
                     <div align="center">
                         <p:panelGrid columns="2">
-                            <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controleAluno.objeto.id}" size="5"
-                                         readonly="true"/>
+                            <p:outputLabel value="Nome de Usuário" for="txtNomeUsuario"/>
+                            <p:inputText value="#{controleAluno.objeto.nomeUsuario}"
+                                         size="75" maxlength="100"
+                                         id="txtNomeUsuario"
+                                         required="true"
+                                         readonly="#{controleAluno.isEdit}"
+                                         placeholder="Obrigatório"/>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controleAluno.objeto.nome}"
                                          size="75" maxlength="100"
                                          id="txtNome"
                                          required="true"
                                          placeholder="Obrigatório"/>
+                            <p:outputLabel value="Senha" for="txtSenha"/>
+                            <p:inputText value="#{controleAluno.objeto.senha}"
+                                         size="75" maxlength="100"
+                                         id="txtSenha"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
                             <p:outputLabel value="E-mail" for="txtEmail"/>
                             <p:inputText value="#{controleAluno.objeto.email}"
-                                         size="75" maxlength="100" 
+                                         size="75" maxlength="100"
                                          id="txtEmail"
                                          required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Data de Nascimento" for="txtNascimento"/>
-                            <p:calendar value="#{controleAluno.objeto.nascimento}"
-                                         id="txtNascimento"
-                                         locale="pt_BR"
-                                         pattern="dd/MM/yyyy"
-                                         mask="true"                                         
-                                         navigator="true"
-                                         required="true"
-                                         placeholder="Obrigatório"
-                                         converter="converterCalendar">                                
+                            <p:calendar id="txtNascimento" value="#{controleAluno.objeto.nascimento}"
+                                        mask="true" pattern="dd/MM/yyyy" navigator="true" size="10">
+                                <f:converter binding="#{converterCalendar}" />
                             </p:calendar>
                         </p:panelGrid>
                     </div>
@@ -98,7 +102,7 @@
                         </div>
                     </p:panel>
                 </h:form>
-            </p:dialog>            
+            </p:dialog>
         </ui:define>
     </ui:composition>
 </html>

@@ -26,6 +26,8 @@ public class ControleProfessor implements Serializable {
 
     private Professor objeto;
 
+    private boolean isEdit = false;
+
     public ControleProfessor() {
     }
 
@@ -35,10 +37,12 @@ public class ControleProfessor implements Serializable {
 
     public void novo() {
         objeto = new Professor();
+        isEdit = false;
     }
 
     public void alterar(Object id) {
         try {
+            isEdit = false;
             objeto = dao.getObjectById(id);
         } catch (Exception e) {
             Util.mensagemErro("Erro ao recuperar objeto: "
@@ -59,12 +63,14 @@ public class ControleProfessor implements Serializable {
 
     public void salvar() {
         try {
-            if (objeto.getNomeUsuario() == null) {
-                dao.persist(objeto);
+            //id nesse caso não é gerado pelo BD
+            if (!getIsEdit()) {
+                dao.persist(getObjeto());
+                Util.mensagemInformacao("Objeto persistido com sucesso!");
             } else {
-                dao.merge(objeto);
+                dao.merge(getObjeto());
+                Util.mensagemInformacao("Objeto alterado com sucesso!");
             }
-            Util.mensagemInformacao("Objeto persistido com sucesso!");
         } catch (Exception e) {
             Util.mensagemErro("Erro ao persistir objeto: "
                     + Util.getMensagemErro(e));
@@ -77,5 +83,13 @@ public class ControleProfessor implements Serializable {
 
     public Professor getObjeto() {
         return objeto;
+    }
+
+    public boolean getIsEdit() {
+        return isEdit;
+    }
+
+    public void setIsEdit(boolean isEdit) {
+        this.isEdit = isEdit;
     }
 }
