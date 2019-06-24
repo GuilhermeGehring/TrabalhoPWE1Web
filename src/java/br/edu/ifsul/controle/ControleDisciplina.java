@@ -1,40 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.dao.AlunoDAO;
-import br.edu.ifsul.modelo.Aluno;
+import br.edu.ifsul.dao.DisciplinaDAO;
+import br.edu.ifsul.modelo.Disciplina;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-/**
- *
- * @author 20171pf.cc0178
- */
-@Named(value = "controleAluno")
+@Named(value = "controleDisciplina")
 @ViewScoped
-public class ControleAluno implements Serializable {
+public class ControleDisciplina implements Serializable {
 
     @EJB
-    private AlunoDAO dao;
+    private DisciplinaDAO dao;
 
-    private Aluno objeto;
+    private Disciplina objeto;
 
-    public ControleAluno() {
+    public ControleDisciplina() {
     }
 
     public String listar() {
-        return "/privado/aluno/crud?faces-redirect=true";
+        return "/privado/disciplina/listar?faces-redirect=true";
     }
 
     public void novo() {
-        objeto = new Aluno();
+        objeto = new Disciplina();
     }
 
     public void alterar(Object id) {
@@ -59,7 +50,7 @@ public class ControleAluno implements Serializable {
 
     public void salvar() {
         try {
-            if (objeto.getNomeUsuario() == null) {
+            if (objeto.getId() == null) {
                 dao.persist(objeto);
             } else {
                 dao.merge(objeto);
@@ -71,11 +62,11 @@ public class ControleAluno implements Serializable {
         }
     }
 
-    public AlunoDAO getDao() {
+    public DisciplinaDAO getDao() {
         return dao;
     }
 
-    public Aluno getObjeto() {
+    public Disciplina getObjeto() {
         return objeto;
     }
 }

@@ -1,24 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converters.ConverterOrdem;
-import br.edu.ifsul.modelo.Instituicao;
+import br.edu.ifsul.modelo.Disciplina;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
-/**
- *
- * @author 20171pf.cc0178
- */
 @Stateful
-public class InstituicaoDAO extends DAOGenerico<Instituicao> implements Serializable {
+public class DisciplinaDAO extends DAOGenerico<Disciplina> implements Serializable {
 
-    public InstituicaoDAO() {
-        super(Instituicao.class);
+    public DisciplinaDAO() {
+        super(Disciplina.class);
 
         // inicializar as ordenações possiveis
         listaOrdem.add(new Ordem("id", "ID", "="));

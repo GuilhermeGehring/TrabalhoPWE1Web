@@ -6,20 +6,19 @@
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converters.ConverterOrdem;
-import br.edu.ifsul.modelo.Instituicao;
+import br.edu.ifsul.modelo.Curso;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
 /**
  *
- * @author 20171pf.cc0178
+ * @author guilherme
  */
 @Stateful
-public class InstituicaoDAO extends DAOGenerico<Instituicao> implements Serializable {
+public class CursoDAO extends DAOGenerico<Curso> implements Serializable {
 
-    public InstituicaoDAO() {
-        super(Instituicao.class);
-
+    public CursoDAO() {
+        super(Curso.class);
         // inicializar as ordenações possiveis
         listaOrdem.add(new Ordem("id", "ID", "="));
         listaOrdem.add(new Ordem("nome", "Nome", "like"));
@@ -29,4 +28,11 @@ public class InstituicaoDAO extends DAOGenerico<Instituicao> implements Serializ
         converterOrdem = new ConverterOrdem(listaOrdem);
     }
 
+    @Override
+    public Curso getObjectById(Object id) throws Exception {
+        Curso obj = em.find(Curso.class, id);
+        // Deve-se inicializar as coleções para não gerar erro de LazyInicializationException
+        obj.getDisciplinas().size();
+        return obj;
+    }
 }

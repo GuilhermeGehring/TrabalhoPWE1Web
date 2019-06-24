@@ -16,7 +16,21 @@
         <h:form id="formMenu" prependId="false">
             <p:megaMenu>
                 <p:menuitem value="Inicio" url="/index.xhtml" icon="ui-icon-home"/>
-                <p:submenu label="Cadastros">
+                <p:submenu label="Usuario: #{controleLogin.usuarioAutenticado != null ? controleLogin.usuarioAutenticado.nome : ''}" >
+                    <p:column>
+                        <p:submenu label="Efetuar login" rendered="#{controleLogin.usuarioAutenticado == null}">
+                            <p:menuitem action="#{controleLogin.paginaLogin()}"
+                                        value="Login"
+                                        ajax="false"/>
+                        </p:submenu>
+                        <p:submenu label="Efetuar logout" rendered="#{controleLogin.usuarioAutenticado != null}">
+                            <p:menuitem action="#{controleLogin.efetuarLogout()}"
+                                        value="Logout"
+                                        ajax="false"/>
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+                <p:submenu label="Cadastros" rendered="#{p:ifGranted('USUARIO') or p:ifGranted('ADMINISTRADOR')}">
                     <p:column>
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controleEspecialidade.listar()}"
@@ -24,22 +38,34 @@
                                         ajax="false"/>
                             <p:menuitem action="#{controleInstituicao.listar()}"
                                         value="Manutenção de Instituições"
-                                        ajax="false"/>                            
+                                        ajax="false"/>
                             <p:menuitem action="#{controleAluno.listar()}"
                                         value="Manutenção de Alunos"
                                         ajax="false"/>
                             <p:menuitem action="#{controleProfessor.listar()}"
                                         value="Manutenção de Professores"
                                         ajax="false"/>
-                        </p:submenu>                     
+                        </p:submenu>
                     </p:column>
-                </p:submenu>   
-                
-            </p:megaMenu>            
+                </p:submenu>
+                <p:submenu label="Cadastros Etapa 2" rendered="#{p:ifGranted('ADMINISTRADOR')}">
+                    <p:column>
+                        <p:submenu label="Básicos">
+                            <p:menuitem action="#{controleCurso.listar()}"
+                                        value="Manutenção de Cursos"
+                                        ajax="false"/>
+                            <p:menuitem action="#{controleDisciplina.listar()}"
+                                        value="Manutenção de Disciplinas"
+                                        ajax="false"/>
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+
+            </p:megaMenu>
         </h:form>
         <ui:insert name="conteudo">
-        </ui:insert>                
+        </ui:insert>
         <ui:include src="ajaxstatus.xhtml"/>
     </h:body>
-    
+
 </html>

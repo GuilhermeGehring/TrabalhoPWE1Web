@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <p:dialog header="Edição" widgetVar="dlg" resizable="false"
+              modal="true" width="50%" height="100%">
+        <h:form id="formEdicao" prependId="false">
+            <p:growl id="growl"/>
+            <p:tabView id="tab">
+                <p:tab title="Dados Principais">
+                    <div align="center">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="ID"/>
+                            <p:inputText value="#{controleDisciplina.objeto.id}" size="5"
+                                         readonly="true"/>
+                            <p:outputLabel value="Nome" for="txtNome"/>
+                            <p:inputText value="#{controleDisciplina.objeto.nome}"
+                                         size="75" maxlength="100"
+                                         id="txtNome"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Descrição" for="txtDescricao"/>
+                            <p:inputTextarea id="txtDescricao"
+                                             value="#{controleDisciplina.objeto.descricao}"
+                                             rows="6"
+                                             cols="70"/>
+                            <p:outputLabel value="Conhecimentos Mínimos" for="txtConhecimentosMinimos"/>
+                            <p:inputTextarea id="txtConhecimentosMinimos"
+                                             value="#{controleDisciplina.objeto.conhecimentosMinimos}"
+                                             rows="6"
+                                             cols="70"/>
+                            <p:outputLabel value="Carga Horária" for="txtCargaHoraria"/>
+                            <p:inputNumber id="txtCargaHoraria"
+                                           value="#{controleDisciplina.objeto.cargaHoraria}"
+                                           size="15"/>
+                            <p:outputLabel value="Curso: " for="selectCurso"/>
+                            <p:selectOneMenu value="#{controleDisciplina.objeto.curso}" id="selectCurso"
+                                             filter="true" filterMatchMode="startsWith" >
+                                <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
+                                <f:converter binding="#{converterCurso}" />
+                                <f:selectItems value="#{controleCurso.dao.listaTodos}" var="cur"
+                                               itemLabel="#{cur.nome}" />
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                    </div>
+                </p:tab>
+
+                <!--                <p:tab title="Disciplinas">
+
+                                    <p:dataTable value="#{controleCurso.objeto.disciplinas}"
+                                                 var="disciplina" rowIndexVar="idxDisciplina" id="listaDisciplina">
+                                        <f:facet name="header">
+                                            <p:commandButton value="Nova Disciplina" actionListener="#{controleCurso.novaDisciplina()}"
+                                                             update=":formDisciplina" icon="ui-icon-plus" process="@this"
+                                                             oncomplete="PF('dlgDisciplina').show();"/>
+                                        </f:facet>
+                                        <p:column headerText="ID">
+                                            <p:outputLabel value="#{disciplina.id}"/>
+                                        </p:column>
+                                        <p:column headerText="Nome">
+                                            <p:outputLabel value="#{disciplina.nome}"/>
+                                        </p:column>
+                                        <p:column headerText="Ações">
+                                            <div align="center">
+                                                <p:commandButton icon="ui-icon-pencil"
+                                                                 actionListener="#{controleCurso.alterarDisciplina(idxDisciplina)}"
+                                                                 update=":formDisciplina" process="@this"
+                                                                 oncomplete="PF('dlgItemServico').show();"/>
+                                                <p:commandButton icon="ui-icon-trash"
+                                                                 actionListener="#{controleCurso.removerDisciplina(idxDisciplina)}"
+                                                                 process="@this" update="tab:listaDisciplina growl"
+                                                                 onclick="if (!confirm('Confirma a exclusão do objeto?'))
+                                                                             return false"/>
+                                            </div>
+                                        </p:column>
+                                    </p:dataTable>
+
+                                </p:tab>-->
+            </p:tabView>
+            <p:panel>
+                <div align="center">
+                    <p:commandButton value="Salvar"
+                                     icon="ui-icon-disk"
+                                     actionListener="#{controleDisciplina.salvar()}"
+                                     rendered="#{p:ifGranted('ADMINISTRADOR')}"
+                                     update="formEdicao formListagem"
+                                     oncomplete="if(!args.validationFailed) {PF('dlg').hide();}"/>
+                </div>
+            </p:panel>
+        </h:form>
+    </p:dialog>
+    <!--    <p:dialog header="Edição de Disciplina" widgetVar="dlgDisciplina" resizable="false" modal="true">
+            <h:form id="formDisciplina">
+                <p:growl />
+                <p:panelGrid columns="2">
+                    <f:facet name="footer">
+                        <div align="center">
+                            <p:commandButton  value="Salvar" icon="ui-icon-disk"
+                                              actionListener="#{controleDisciplina.salvarDisciplina()}"
+                                              update="tab:listaDisciplina growl"
+                                              process="@form"
+                                              oncomplete="if(!args.validationFailed){PF('dlgDisciplina').hide();}"/>
+                        </div>
+                    </f:facet>
+                    <p:outputLabel value="ID"/>
+                    <p:inputText value="#{controleCurso.disciplina.id}" readonly="true"
+                                 size="10"/>
+                    <p:outputLabel value="Nome" for="txtNome"/>
+                    <p:inputText id="txtNome"
+                                 value="#{controleCurso.disciplina.nome}"
+                                 size="70"/>
+                    <p:outputLabel value="Descrição" for="txtDescricao"/>
+                    <p:inputTextarea id="txtDescricao"
+                                     value="#{controleCurso.disciplina.descricao}"
+                                     rows="6"
+                                     cols="70"/>
+                    <p:outputLabel value="Conhecimentos Mínimos" for="txtConhecimentosMinimos"/>
+                    <p:inputTextarea id="txtConhecimentosMinimos"
+                                     value="#{controleCurso.disciplina.conhecimentosMinimos}"
+                                     rows="6"
+                                     cols="70"/>
+                    <p:outputLabel value="Carga Horária" for="txtCargaHoraria"/>
+                    <p:inputNumber id="txtCargaHoraria"
+                                   value="#{controleCurso.disciplina.cargaHoraria}"
+                                   size="15"/>
+                </p:panelGrid>
+            </h:form>
+            <ui:include src="/templates/ajaxstatus.xhtml"/>
+        </p:dialog>-->
+</html>

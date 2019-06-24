@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.dao;
 
+import br.edu.ifsul.converters.ConverterOrdem;
 import br.edu.ifsul.modelo.Aluno;
 import java.io.Serializable;
 import java.util.List;
@@ -20,14 +21,22 @@ public class AlunoDAO extends DAOGenerico<Aluno> implements Serializable {
 
     public AlunoDAO() {
         super(Aluno.class);
+
+        // inicializar as ordenações possiveis
+        listaOrdem.add(new Ordem("nomeUsuario", "Nome de Usuário", "like"));
+        listaOrdem.add(new Ordem("nome", "Nome", "like"));
+        // definir qual a ordenação padrão no caso o segundo elemento da lista (indice 1)
+        ordemAtual = listaOrdem.get(1);
+        // inicializar o conversor com a lista de ordens
+        converterOrdem = new ConverterOrdem(listaOrdem);
     }
 
     @Override
     public Aluno getObjectById(Object id) throws Exception {
         List<Aluno> alunos = getListaObjetos();
-        System.out.println("ID: " + id);
+        System.out.println("Nome do Usuário: " + id);
         for (Aluno aluno : alunos) {
-            if (Objects.equals(aluno.getId(), id)) {
+            if (Objects.equals(aluno.getNomeUsuario(), id)) {
                 return aluno;
             }
         }
