@@ -62,6 +62,9 @@
                                              update=":formDisciplina" icon="ui-icon-plus" process="@this"
                                              oncomplete="PF('dlgDisciplina').show();"/>
                         </f:facet>
+                        <p:column headerText="IDd">
+                            <p:outputLabel value="#{idxDisciplina}"/>
+                        </p:column>
                         <p:column headerText="ID">
                             <p:outputLabel value="#{disciplina.id}"/>
                         </p:column>

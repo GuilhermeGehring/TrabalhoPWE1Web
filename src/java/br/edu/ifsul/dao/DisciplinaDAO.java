@@ -21,4 +21,12 @@ public class DisciplinaDAO extends DAOGenerico<Disciplina> implements Serializab
         converterOrdem = new ConverterOrdem(listaOrdem);
     }
 
+    @Override
+    public Disciplina getObjectById(Object id) throws Exception {
+        Disciplina obj = em.find(Disciplina.class, id);
+        // Deve-se inicializar as coleções para não gerar erro de LazyInicializationException na lista de permissao
+        obj.getAlunos().size();
+        return obj;
+    }
+
 }

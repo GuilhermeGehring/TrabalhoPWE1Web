@@ -34,7 +34,7 @@ public class AlunoDAO extends DAOGenerico<Aluno> implements Serializable {
     @Override
     public Aluno getObjectById(Object id) throws Exception {
         List<Aluno> alunos = getListaObjetos();
-        System.out.println("Nome do Usuário: " + id);
+        System.out.println("Nome do Usuário ESTOU AKI CARAI: " + id);
         for (Aluno aluno : alunos) {
             if (Objects.equals(aluno.getNomeUsuario(), id)) {
                 return aluno;

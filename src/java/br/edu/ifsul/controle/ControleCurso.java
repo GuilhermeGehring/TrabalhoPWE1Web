@@ -10,8 +10,10 @@ import br.edu.ifsul.dao.DisciplinaDAO;
 import br.edu.ifsul.modelo.Curso;
 import br.edu.ifsul.modelo.Disciplina;
 import br.edu.ifsul.util.Util;
+import br.edu.ifsul.util.UtilRelatorios;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -33,6 +35,11 @@ public class ControleCurso implements Serializable {
     private Curso objeto;
 
     public ControleCurso() {
+    }
+
+    public void imprimirCursos() {
+        HashMap parametros = new HashMap();
+        UtilRelatorios.imprimeRelatorio("Cursos", parametros, dao.getListaTodos());
     }
 
     public String listar() {

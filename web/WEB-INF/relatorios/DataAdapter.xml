@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beanDataAdapter class="net.sf.jasperreports.data.bean.BeanDataAdapterImpl"><name>Curso</name><factoryClass>br.edu.ifsul.modelo.util.relatorio.FabricaObjetos</factoryClass><methodName>carregaCursos</methodName><useFieldDescription>false</useFieldDescription></beanDataAdapter>

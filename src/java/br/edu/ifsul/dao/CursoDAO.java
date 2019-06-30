@@ -8,6 +8,7 @@ package br.edu.ifsul.dao;
 import br.edu.ifsul.converters.ConverterOrdem;
 import br.edu.ifsul.modelo.Curso;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateful;
 
 /**
@@ -31,8 +32,18 @@ public class CursoDAO extends DAOGenerico<Curso> implements Serializable {
     @Override
     public Curso getObjectById(Object id) throws Exception {
         Curso obj = em.find(Curso.class, id);
-        // Deve-se inicializar as coleções para não gerar erro de LazyInicializationException
+        // Deve-se inicializar as coleções para não gerar erro de LazyInicializationException na lista de permissao
         obj.getDisciplinas().size();
         return obj;
+    }
+
+    @Override
+    public List<Curso> getListaTodos() {
+        String jpql = "from Curso order by " + ordemAtual.getAtributo();
+        List<Curso> cursos = em.createQuery(jpql).getResultList();
+        for (Curso c : cursos) {
+            c.getDisciplinas().size();
+        }
+        return cursos;
     }
 }
