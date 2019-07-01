@@ -6,10 +6,11 @@ import br.edu.ifsul.modelo.Aluno;
 import br.edu.ifsul.modelo.Disciplina;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
+import java.util.HashSet;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import org.jboss.weld.util.collections.ArraySet;
+//import org.jboss.weld.util.collections.ArraySet;
 
 @Named(value = "controleDisciplina")
 @SessionScoped
@@ -22,16 +23,16 @@ public class ControleDisciplina implements Serializable {
 
     @EJB
     private AlunoDAO daoAluno;
-    private Aluno aluno;
+    private Aluno alunoo;
 
     public ControleDisciplina() {
     }
 
     public void adicionarAluno() {
-        System.out.println("Aluno: " + aluno);
-        if (aluno != null) {
-            if (!objeto.getAlunos().contains(aluno)) {
-                objeto.getAlunos().add(aluno);
+        System.out.println("Aluno: " + alunoo);
+        if (alunoo != null) {
+            if (!objeto.getAlunos().contains(alunoo)) {
+                objeto.getAlunos().add(alunoo);
                 Util.mensagemInformacao("Aluno adicionado com sucesso!");
             } else {
                 Util.mensagemErro("Este aluno já existe na sua lista!");
@@ -40,8 +41,8 @@ public class ControleDisciplina implements Serializable {
     }
 
     public void salvarAluno() {
-        if (!objeto.getAlunos().contains(aluno)) {
-            objeto.getAlunos().add(aluno);
+        if (!objeto.getAlunos().contains(alunoo)) {
+            objeto.getAlunos().add(alunoo);
             Util.mensagemInformacao("Aluno adicionado com sucesso!");
         } else {
             Util.mensagemErro("Este aluno já foi adicionado a lista!");
@@ -66,7 +67,7 @@ public class ControleDisciplina implements Serializable {
     public void novo() {
         novoObjeto = true;
         objeto = new Disciplina();
-        objeto.setAlunos(new ArraySet<>());
+        objeto.setAlunos(new HashSet<>());
     }
 
     public void alterar(Object id) {
@@ -109,14 +110,14 @@ public class ControleDisciplina implements Serializable {
         }
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public Aluno getAlunoo() {
+        return alunoo;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setAlunoo(Aluno alunoo) {
+        this.alunoo = alunoo;
     }
-
+   
     public DisciplinaDAO getDao() {
         return dao;
     }

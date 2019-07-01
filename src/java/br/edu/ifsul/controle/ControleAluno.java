@@ -11,10 +11,11 @@ import br.edu.ifsul.modelo.Aluno;
 import br.edu.ifsul.modelo.Permissao;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
+import java.util.HashSet;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import org.jboss.weld.util.collections.ArraySet;
+//import org.jboss.weld.util.collections.ArraySet;
 
 /**
  *
@@ -43,7 +44,7 @@ public class ControleAluno implements Serializable {
 
     public void novo() {
         objeto = new Aluno();
-        objeto.setPermissoes(new ArraySet<>());
+        objeto.setPermissoes(new HashSet<>());
         isEdit = false;
     }
 
