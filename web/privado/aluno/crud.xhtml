@@ -57,41 +57,83 @@
                       modal="true" width="50%" height="100%">
                 <h:form id="formEdicao" prependId="false">
                     <p:growl id="growl"/>
-                    <div align="center">
-                        <p:panelGrid columns="2">
-                            <p:outputLabel value="Nome de Usuário" for="txtNomeUsuario"/>
-                            <p:inputText value="#{controleAluno.objeto.nomeUsuario}"
-                                         size="75" maxlength="100"
-                                         id="txtNomeUsuario"
-                                         required="true"
-                                         readonly="#{controleAluno.isEdit}"
-                                         placeholder="Obrigatório"/>
-                            <p:outputLabel value="Nome" for="txtNome"/>
-                            <p:inputText value="#{controleAluno.objeto.nome}"
-                                         size="75" maxlength="100"
-                                         id="txtNome"
-                                         required="true"
-                                         placeholder="Obrigatório"/>
-                            <p:outputLabel value="Senha" for="txtSenha"/>
-                            <p:inputText value="#{controleAluno.objeto.senha}"
-                                         size="75" maxlength="100"
-                                         id="txtSenha"
-                                         required="true"
-                                         placeholder="Obrigatório"/>
-                            <p:outputLabel value="E-mail" for="txtEmail"/>
-                            <p:inputText value="#{controleAluno.objeto.email}"
-                                         size="75" maxlength="100"
-                                         id="txtEmail"
-                                         required="true"
-                                         placeholder="Obrigatório"/>
-                            <p:outputLabel value="Data de Nascimento" for="txtNascimento"/>
-                            <p:calendar id="txtNascimento" value="#{controleAluno.objeto.nascimento}"
-                                        mask="true" pattern="dd/MM/yyyy" navigator="true" size="10">
-                                <f:converter binding="#{converterCalendar}" />
-                            </p:calendar>
-                        </p:panelGrid>
-                    </div>
-
+                    <p:tabView id="tab">
+                        <p:tab title="Dados Principais">
+                            <div align="center">
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="Nome de Usuário" for="txtNomeUsuario"/>
+                                    <p:inputText value="#{controleAluno.objeto.nomeUsuario}"
+                                                 size="70" maxlength="100"
+                                                 id="txtNomeUsuario"
+                                                 required="true"
+                                                 readonly="#{controleAluno.isEdit}"
+                                                 placeholder="Obrigatório"/>
+                                    <p:outputLabel value="Nome" for="txtNome"/>
+                                    <p:inputText value="#{controleAluno.objeto.nome}"
+                                                 size="70" maxlength="100"
+                                                 id="txtNome"
+                                                 required="true"
+                                                 placeholder="Obrigatório"/>
+                                    <p:outputLabel value="Senha" for="txtSenha"/>
+                                    <p:inputText value="#{controleAluno.objeto.senha}"
+                                                 size="70" maxlength="100"
+                                                 id="txtSenha"
+                                                 required="true"
+                                                 placeholder="Obrigatório"/>
+                                    <p:outputLabel value="E-mail" for="txtEmail"/>
+                                    <p:inputText value="#{controleAluno.objeto.email}"
+                                                 size="70" maxlength="100"
+                                                 id="txtEmail"
+                                                 required="true"
+                                                 placeholder="Obrigatório"/>
+                                    <p:outputLabel value="Data de Nascimento" for="txtNascimento"/>
+                                    <p:calendar id="txtNascimento" value="#{controleAluno.objeto.nascimento}"
+                                                mask="true" pattern="dd/MM/yyyy" navigator="true" size="10">
+                                        <f:converter binding="#{converterCalendar}" />
+                                    </p:calendar>
+                                </p:panelGrid>
+                            </div>
+                        </p:tab>
+                        <p:tab title="Permissões">
+                            <p:dataTable value="#{controleAluno.objeto.permissoes}"
+                                         var="per" id="listaPermissoes">
+                                <f:facet name="header">
+                                    <p:panelGrid columns="3">
+                                        <p:outputLabel value="Permissao"/>
+                                        <p:selectOneMenu value="#{controleAluno.permissao}"
+                                                         id="selectPermissao">
+                                            <f:converter binding="#{converterPermissao}"/>
+                                            <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
+                                            <f:selectItems value="#{controleAluno.daoPermissao.listaTodos}" var="p"
+                                                           itemLabel="#{p.nome}"/>
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="Adicionar"
+                                                         actionListener="#{controleAluno.salvarPermissao()}"
+                                                         update="listaPermissoes growl"
+                                                         id="btnAdicionarPermissao"
+                                                         process="btnAdicionarPermissao selectPermissao"
+                                                         icon="ui-icon-plus"/>
+                                    </p:panelGrid>
+                                </f:facet>
+                                <p:column headerText="Nome">
+                                    <p:outputLabel value="#{per.nome}"/>
+                                </p:column>
+                                <p:column headerText="Descrição">
+                                    <p:outputLabel value="#{per.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Ações">
+                                    <div align="center">
+                                        <p:commandButton id="btnRemoverPermissao"
+                                                         actionListener="#{controleAluno.excluirPermissao(per)}"
+                                                         process="btnRemoverPermissao" update="listaPermissoes growl"
+                                                         icon="ui-icon-trash"
+                                                         onclick="if (!confirm('Confirma a remoção da permissão?'))
+                                                                     return false"/>
+                                    </div>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                    </p:tabView>
                     <p:panel>
                         <div align="center">
                             <p:commandButton value="Salvar"

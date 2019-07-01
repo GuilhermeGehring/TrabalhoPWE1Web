@@ -38,10 +38,6 @@ public class AlunoDAO extends DAOGenerico<Aluno> implements Serializable {
         for (Aluno aluno : alunos) {
             if (Objects.equals(aluno.getNomeUsuario(), id)) {
                 aluno.getPermissoes().size();
-                System.out.println("Permissão: ");
-                for (Permissao p : aluno.getPermissoes()) {
-                    System.out.println("Permissão: " + p.getNome());
-                }
                 return aluno;
             }
         }
