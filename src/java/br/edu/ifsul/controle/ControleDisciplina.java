@@ -73,11 +73,7 @@ public class ControleDisciplina implements Serializable {
     public void alterar(Object id) {
         try {
             novoObjeto = false;
-            objeto = dao.getObjectById(id);
-            System.out.println("Aluno do curso: ");
-            for (Aluno a : objeto.getAlunos()) {
-                System.out.println("Aluno do curso: " + a.getNomeUsuario());
-            }
+            objeto = dao.getObjectById(id);            
         } catch (Exception e) {
             Util.mensagemErro("Erro ao recuperar objeto: "
                     + Util.getMensagemErro(e));
