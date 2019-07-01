@@ -6,10 +6,10 @@ import br.edu.ifsul.modelo.Aluno;
 import br.edu.ifsul.modelo.Disciplina;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.jboss.weld.util.collections.ArraySet;
 
 @Named(value = "controleDisciplina")
 @SessionScoped
@@ -17,13 +17,12 @@ public class ControleDisciplina implements Serializable {
 
     @EJB
     private DisciplinaDAO dao;
+    private Disciplina objeto;
+    private Boolean novoObjeto;
 
     @EJB
     private AlunoDAO daoAluno;
-
     private Aluno aluno;
-
-    private Disciplina objeto;
 
     public ControleDisciplina() {
     }
@@ -40,9 +39,23 @@ public class ControleDisciplina implements Serializable {
         }
     }
 
-    public void removerAluno(int index) {
-        aluno = objeto.getAlunos().get(index);
-        objeto.getAlunos().remove(aluno);
+    public void salvarAluno() {
+        if (!objeto.getAlunos().contains(aluno)) {
+            objeto.getAlunos().add(aluno);
+            Util.mensagemInformacao("Aluno adicionado com sucesso!");
+        } else {
+            Util.mensagemErro("Este aluno já foi adicionado a lista!");
+        }
+
+    }
+
+    public void excluirAluno(Aluno obj) {
+        objeto.getAlunos().remove(obj);
+        Util.mensagemInformacao("Aluno removido com sucesso!");
+    }
+
+    public void removerAluno(Aluno al) {
+        objeto.getAlunos().remove(al);
         Util.mensagemInformacao("Aluno removido com sucesso!");
     }
 
@@ -51,13 +64,19 @@ public class ControleDisciplina implements Serializable {
     }
 
     public void novo() {
+        novoObjeto = true;
         objeto = new Disciplina();
-        objeto.setAlunos(new ArrayList());
+        objeto.setAlunos(new ArraySet<>());
     }
 
     public void alterar(Object id) {
         try {
+            novoObjeto = false;
             objeto = dao.getObjectById(id);
+            System.out.println("Aluno do curso: ");
+            for (Aluno a : objeto.getAlunos()) {
+                System.out.println("Aluno do curso: " + a.getNomeUsuario());
+            }
         } catch (Exception e) {
             Util.mensagemErro("Erro ao recuperar objeto: "
                     + Util.getMensagemErro(e));
@@ -77,7 +96,7 @@ public class ControleDisciplina implements Serializable {
 
     public void salvar() {
         try {
-            if (objeto.getId() == null) {
+            if (novoObjeto) {
                 dao.persist(objeto);
             } else {
                 dao.merge(objeto);
@@ -104,6 +123,14 @@ public class ControleDisciplina implements Serializable {
 
     public Disciplina getObjeto() {
         return objeto;
+    }
+
+    public Boolean getNovoObjeto() {
+        return novoObjeto;
+    }
+
+    public void setNovoObjeto(Boolean novoObjeto) {
+        this.novoObjeto = novoObjeto;
     }
 
     public AlunoDAO getDaoAluno() {

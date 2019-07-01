@@ -23,14 +23,17 @@
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText id="txtNome"
                                          value="#{controleCurso.objeto.nome}"
+                                         required="true"
                                          size="70"/>
                             <p:outputLabel value="Sigla" for="txtSigla"/>
                             <p:inputText id="txtSigla"
                                          value="#{controleCurso.objeto.sigla}"
+                                         required="true"
                                          size="10"/>
                             <p:outputLabel value="Descrição" for="txtDescricao"/>
                             <p:inputTextarea id="txtDescricao"
                                              value="#{controleCurso.objeto.descricao}"
+                                             required="true"
                                              rows="6"
                                              cols="70"/>
                             <p:outputLabel value="Ativo" for="txtAtivo"/>
@@ -38,12 +41,12 @@
                                                      value="#{controleCurso.objeto.ativo}"/>
                             <p:outputLabel value="Início das Atividades" for="txtInicioAtividades"/>
                             <p:calendar id="txtInicioAtividades" value="#{controleCurso.objeto.inicioAtividades}"
-                                        mask="true" pattern="dd/MM/yyyy" navigator="true" size="10">
+                                        mask="true" pattern="dd/MM/yyyy" required="true" navigator="true" size="10">
                                 <f:converter binding="#{converterCalendar}" />
                             </p:calendar>
                             <p:outputLabel value="Instituição" for="selectInstituicao"/>
                             <p:selectOneMenu value="#{controleCurso.objeto.instituicao}" id="selectInstituicao"
-                                             filter="true" filterMatchMode="startsWith" >
+                                             filter="true" required="true" filterMatchMode="startsWith" >
                                 <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
                                 <f:converter binding="#{converterInstituicao}" />
                                 <f:selectItems value="#{controleInstituicao.dao.listaObjetos}" var="inst"
@@ -62,9 +65,6 @@
                                              update=":formDisciplina" icon="ui-icon-plus" process="@this"
                                              oncomplete="PF('dlgDisciplina').show();"/>
                         </f:facet>
-                        <p:column headerText="IDd">
-                            <p:outputLabel value="#{idxDisciplina}"/>
-                        </p:column>
                         <p:column headerText="ID">
                             <p:outputLabel value="#{disciplina.id}"/>
                         </p:column>
@@ -119,20 +119,24 @@
                 <p:outputLabel value="Nome" for="txtNome"/>
                 <p:inputText id="txtNome"
                              value="#{controleCurso.disciplina.nome}"
+                             required="true"
                              size="70"/>
                 <p:outputLabel value="Descrição" for="txtDescricao"/>
                 <p:inputTextarea id="txtDescricao"
                                  value="#{controleCurso.disciplina.descricao}"
+                                 required="true"
                                  rows="6"
                                  cols="70"/>
                 <p:outputLabel value="Conhecimentos Mínimos" for="txtConhecimentosMinimos"/>
                 <p:inputTextarea id="txtConhecimentosMinimos"
                                  value="#{controleCurso.disciplina.conhecimentosMinimos}"
+                                 required="true"
                                  rows="6"
                                  cols="70"/>
                 <p:outputLabel value="Carga Horária" for="txtCargaHoraria"/>
                 <p:inputNumber id="txtCargaHoraria"
                                value="#{controleCurso.disciplina.cargaHoraria}"
+                               required="true"
                                size="15"/>
             </p:panelGrid>
         </h:form>

@@ -22,7 +22,7 @@
                                          readonly="true"/>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controleDisciplina.objeto.nome}"
-                                         size="7" maxlength="100"
+                                         size="70" maxlength="100"
                                          id="txtNome"
                                          required="true"
                                          placeholder="Obrigatório"/>
@@ -30,19 +30,23 @@
                             <p:inputTextarea id="txtDescricao"
                                              value="#{controleDisciplina.objeto.descricao}"
                                              rows="6"
+                                             required="true"
                                              cols="70"/>
                             <p:outputLabel value="Conhecimentos Mínimos" for="txtConhecimentosMinimos"/>
                             <p:inputTextarea id="txtConhecimentosMinimos"
                                              value="#{controleDisciplina.objeto.conhecimentosMinimos}"
                                              rows="6"
+                                             required="true"
                                              cols="70"/>
                             <p:outputLabel value="Carga Horária" for="txtCargaHoraria"/>
                             <p:inputNumber id="txtCargaHoraria"
                                            value="#{controleDisciplina.objeto.cargaHoraria}"
+                                           required="true"
                                            size="15"/>
                             <p:outputLabel value="Curso: " for="selectCurso"/>
                             <p:selectOneMenu value="#{controleDisciplina.objeto.curso}" id="selectCurso"
-                                             filter="true" filterMatchMode="startsWith" >
+                                             filter="true" filterMatchMode="startsWith"
+                                             required="true">
                                 <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
                                 <f:converter binding="#{converterCurso}" />
                                 <f:selectItems value="#{controleCurso.dao.listaTodos}" var="cur"
@@ -52,40 +56,78 @@
                     </div>
                 </p:tab>
 
-                <p:tab title="Alunos">
+                <!--                <p:tab title="Alunos">
+                                    <p:dataTable value="#{controleDisciplina.objeto.alunos}"
+                                                 var="aluno" rowIndexVar="idxAluno" id="listaAlunos">
+                                        <f:facet name="header">
+                                            <p:panelGrid columns="2">
+                                                <p:selectOneMenu id="selectAluno" value="#{controleDisciplina.aluno}" >
+                                                    <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
+                                                    <f:selectItems value="#{controleAluno.dao.listaObjetos}"
+                                                                   var="alu"
+                                                                   itemLabel="#{alu.nome}"/>
+                                                    <f:converter binding="#{converterAluno}" />
+                                                </p:selectOneMenu>
+                                                <p:commandButton value="Adicionar"
+                                                                 actionListener="#{controleDisciplina.adicionarAluno()}"
+                                                                 update="listaAlunos :formEdicao:growl"
+                                                                 id="btnAdicionarAluno"
+                                                                 process="btnAdicionarAluno selectAluno"
+                                                                 icon="ui-icon-plus"/>
+                                            </p:panelGrid>
+                                        </f:facet>
+                                        <p:column headerText="IDd">
+                                            <p:outputLabel value="#{idxAluno}"/>
+                                        </p:column>
+                                        <p:column headerText="Usuário">
+                                            <p:outputLabel value="#{aluno.nomeUsuario}"/>
+                                        </p:column>
+                                        <p:column headerText="Nome">
+                                            <p:outputLabel value="#{aluno.nome}"/>
+                                        </p:column>
+                                        <p:column headerText="Ações">
+                                            <div align="center">
+                                                <p:commandButton actionListener="#{controleDisciplina.removerAluno(idxAluno)}"
+                                                                 process="@this" update="listaAlunos"
+                                                                 icon="ui-icon-trash"
+                                                                 onclick="if (!confirm('Confirma a remoção do aluno?'))
+                                                                             return false"/>
+                                            </div>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>-->
+                <p:tab title="Permissões">
                     <p:dataTable value="#{controleDisciplina.objeto.alunos}"
-                                 var="aluno" rowIndexVar="idxAluno" id="listaAlunos">
+                                 var="alu" id="listaAlunos">
                         <f:facet name="header">
-                            <p:panelGrid columns="2">
+                            <p:panelGrid columns="3">
+                                <p:outputLabel value="Aluno"/>
                                 <p:selectOneMenu value="#{controleDisciplina.aluno}"
                                                  id="selectAluno">
-                                    <f:converter binding="#{converterAluno}" />
+                                    <f:converter binding="#{converterAluno}"/>
                                     <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
-                                    <f:selectItems value="#{controleDisciplina.daoAluno.listaTodos}" var="alu"
-                                                   itemLabel="#{alu.nome}"/>
+                                    <f:selectItems value="#{controleDisciplina.daoAluno.listaTodos}" var="a"
+                                                   itemLabel="#{a.nome}"/>
                                 </p:selectOneMenu>
                                 <p:commandButton value="Adicionar"
-                                                 actionListener="#{controleDisciplina.adicionarAluno()}"
-                                                 update="listaAlunos :formEdicao:growl"
+                                                 actionListener="#{controleDisciplina.salvarAluno()}"
+                                                 update="listaAlunos growl"
                                                  id="btnAdicionarAluno"
                                                  process="btnAdicionarAluno selectAluno"
                                                  icon="ui-icon-plus"/>
                             </p:panelGrid>
                         </f:facet>
-                        <p:column headerText="IDd">
-                            <p:outputLabel value="#{idxAluno}"/>
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{alu.nome}"/>
                         </p:column>
                         <p:column headerText="Usuário">
-                            <p:outputLabel value="#{aluno.nomeUsuario}"/>
-                        </p:column>
-                        <p:column headerText="Nome">
-                            <p:outputLabel value="#{aluno.nome}"/>
+                            <p:outputLabel value="#{alu.nomeUsuario}"/>
                         </p:column>
                         <p:column headerText="Ações">
                             <div align="center">
                                 <p:commandButton id="btnRemoverAluno"
-                                                 actionListener="#{controleDisciplina.removerAluno(idxAluno)}"
-                                                 process="btnRemoverAluno" update="listaAlunos formEdicao"
+                                                 actionListener="#{controleDisciplina.excluirAluno(alu)}"
+                                                 process="btnRemoverAluno" update="listaAlunos growl"
                                                  icon="ui-icon-trash"
                                                  onclick="if (!confirm('Confirma a remoção do aluno?'))
                                                              return false"/>

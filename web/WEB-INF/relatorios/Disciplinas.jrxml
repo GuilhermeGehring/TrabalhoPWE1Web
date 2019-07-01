@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Disciplinas" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7161230f-a863-4b8d-a896-6425364f0b4b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="cargaHoraria" class="java.lang.Double">
+		<fieldDescription><![CDATA[cargaHoraria]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55">
+			<staticText>
+				<reportElement x="0" y="0" width="595" height="55" uuid="24635ac7-261a-43b1-99cd-14c3c476fcf0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Disciplinas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="595" height="30" uuid="3369b5aa-aaa4-4310-9271-59f671c977ec"/>
+			</rectangle>
+			<textField>
+				<reportElement x="130" y="0" width="240" height="30" uuid="58f8e4e1-e85c-4277-a926-efc2b5d0d3f6"/>
+				<textFieldExpression><![CDATA["Nome: " + $F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="130" height="30" uuid="c856b1e4-2708-44ba-9d81-fbe2c9679b3e"/>
+				<textFieldExpression><![CDATA["ID: " + $F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="225" height="30" uuid="dc6a5c7a-579d-4713-aa06-642057d5e44a"/>
+				<textFieldExpression><![CDATA["Carga Horária: " + $F{cargaHoraria} + " horas"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -4,6 +4,11 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <!-- increase buffer size to avoid JSF1095 errors -->
+    <context-param>
+        <param-name>javax.faces.FACELETS_BUFFER_SIZE</param-name>
+        <param-value>1310072</param-value>
+    </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>dot-luv</param-value>

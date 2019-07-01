@@ -7,6 +7,7 @@ package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converters.ConverterOrdem;
 import br.edu.ifsul.modelo.Aluno;
+import br.edu.ifsul.modelo.Permissao;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -34,12 +35,17 @@ public class AlunoDAO extends DAOGenerico<Aluno> implements Serializable {
     @Override
     public Aluno getObjectById(Object id) throws Exception {
         List<Aluno> alunos = getListaObjetos();
-        System.out.println("Nome do Usuário ESTOU AKI CARAI: " + id);
         for (Aluno aluno : alunos) {
             if (Objects.equals(aluno.getNomeUsuario(), id)) {
+                aluno.getPermissoes().size();
+                System.out.println("Permissão: ");
+                for (Permissao p : aluno.getPermissoes()) {
+                    System.out.println("Permissão: " + p.getNome());
+                }
                 return aluno;
             }
         }
+        alunos.get(0).getPermissoes().size();
         return alunos.get(0);
 
     }
